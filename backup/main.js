@@ -8,18 +8,39 @@ function getData() {
     let resultHtmlArray = [];
     let animeCards = [];
 
+    console.log(myanimeData);
+
+    // console.log(myanimeDataImg);
+
     var parentElem = document.querySelector(".parentContainer");
     var test = document.querySelector(".test");
 
-    anichartData.forEach(item => {
-        let title = item.split("studio")[0];
+    // anichartData.forEach(item => {
+    //     let title = item.split("studio")[0];
+    //     title = title.substr(title.lastIndexOf("title")).substr(10);
+    //     title = title.substr(0,title.length -44);
+    //
+    //     if (myanimeData.includes(title)) {
+    //         resultArray.push(item);
+    //     }
+    // });
+
+    for (let i = 0; i < anichartData.length; i++) {
+        let title = anichartData[i].split("studio")[0];
         title = title.substr(title.lastIndexOf("title")).substr(10);
         title = title.substr(0,title.length -44);
 
-        if (myanimeData.includes(title)) {
-            resultArray.push(item);
-        }
-    });
+        myanimeData.forEach(item => {
+           let newItem = item.replace("&lt;", " ");
+            if (myanimeData.includes(title)) {
+                resultArray.push(anichartData[i]);
+            }
+        });
+
+
+    }
+
+    console.log(resultArray);
 
     resultArray.forEach(item => {
         let newLine = item.split('&gt;');
@@ -28,7 +49,7 @@ function getData() {
 
     for (let i = 0; i < resultHtmlArray.length; i++) {
         let elem = document.createElement('div');
-        elem.classList.add('card', 'mb-4', 'p-3', `anime-${[i]}`);
+        elem.classList.add('card', 'mb-5', `anime-${[i]}`);
 
         resultHtmlArray[i].forEach(item => {
             let newItem = item.replace("&lt;", " <");
